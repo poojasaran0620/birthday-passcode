@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unlock Your Surprise</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #d9c8e8;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.container {
+  width: min(90%, 420px);
+  background: #fff8df;
+  border: 4px solid #8c62a8;
+  border-radius: 30px;
+  padding: 35px 25px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+h1 {
+  color: #76518e;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #8c6c98;
+  margin-bottom: 25px;
+}
+
+.code-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.box {
+  width: 48px;
+  height: 55px;
+  border: 2px solid #9b73b5;
+  border-radius: 12px;
+  background: white;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #76518e;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 280px;
+  margin: auto;
+}
+
+button {
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  background: #eadcf2;
+  color: #76518e;
+  transition: transform 0.15s;
+}
+
+button:hover {
+  transform: scale(1.04);
+}
+
+.enter {
+  background: #9b73b5;
+  color: white;
+}
+
+.clear {
+  background: #f3d7dc;
+}
+
+.message {
+  min-height: 25px;
+  margin-top: 20px;
+  color: #b05c72;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>🔐 Unlock Your Surprise</h1>
+
+  <div class="subtitle">
+    Enter the secret code 💌
+  </div>
+
+  <div class="code-boxes">
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+    <div class="box" id="box4"></div>
+  </div>
+
+  <div class="keypad">
+
+    <button onclick="addNumber('1')">1</button>
+    <button onclick="addNumber('2')">2</button>
+    <button onclick="addNumber('3')">3</button>
+
+    <button onclick="addNumber('4')">4</button>
+    <button onclick="addNumber('5')">5</button>
+    <button onclick="addNumber('6')">6</button>
+
+    <button onclick="addNumber('7')">7</button>
+    <button onclick="addNumber('8')">8</button>
+    <button onclick="addNumber('9')">9</button>
+
+    <button class="clear" onclick="clearCode()">⌫</button>
+    <button onclick="addNumber('0')">0</button>
+    <button class="enter" onclick="checkCode()">ENTER</button>
+
+  </div>
+
+  <div class="message" id="message"></div>
+
+</div>
+
+<script>
+
+let enteredCode = "";
+
+const correctCode = "1234";
+
+function addNumber(number) {
+
+  if (enteredCode.length < 4) {
+
+    enteredCode += number;
+
+    updateBoxes();
+
+  }
+}
+
+function updateBoxes() {
+
+  for (let i = 1; i <= 4; i++) {
+
+    document.getElementById("box" + i).textContent =
+      enteredCode[i - 1] ? "●" : "";
+
+  }
+
+}
+
+function clearCode() {
+
+  enteredCode = "";
+
+  updateBoxes();
+
+  document.getElementById("message").textContent = "";
+
+}
+
+function checkCode() {
+
+  if (enteredCode === correctCode) {
+
+    document.getElementById("message").style.color = "#6b9b72";
+
+    document.getElementById("message").textContent =
+      "Unlocked! 💗";
+
+    /*
+      WE WILL PUT YOUR CANVA PAGE 2 LINK HERE
+    */
+
+    setTimeout(function() {
+
+      window.location.href = "YOUR_CANVA_PAGE_LINK";
+
+    }, 1000);
+
+  } else {
+
+    document.getElementById("message").style.color = "#b05c72";
+
+    document.getElementById("message").textContent =
+      "Oops! Wrong code. Try again 💕";
+
+    enteredCode = "";
+
+    setTimeout(updateBoxes, 700);
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
